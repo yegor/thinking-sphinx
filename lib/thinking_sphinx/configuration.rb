@@ -91,6 +91,7 @@ module ThinkingSphinx
         self.app_root   = Merb.root                  if defined?(Merb)
         self.app_root   = Sinatra::Application.root  if defined?(Sinatra)
         self.app_root   = Rails.root                 if defined?(Rails)
+        self.app_root   = Brabus.root                if defined?(Brabus)
         self.app_root ||= app_root
       end
 
@@ -135,6 +136,8 @@ module ThinkingSphinx
         Rails.env
       elsif defined?(Sinatra)
         Sinatra::Application.environment.to_s
+      elsif defined?(Brabus)
+        Brabus.env
       else
         ENV['RAILS_ENV'] || 'development'
       end

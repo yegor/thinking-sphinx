@@ -28,6 +28,7 @@ require 'thinking_sphinx/adapters/abstract_adapter'
 require 'thinking_sphinx/adapters/mysql_adapter'
 require 'thinking_sphinx/adapters/postgresql_adapter'
 
+# Require app specific hook mechanism
 require 'thinking_sphinx/railtie' if defined?(Rails)
 
 module ThinkingSphinx
@@ -294,3 +295,6 @@ module ThinkingSphinx
 
   extend ThinkingSphinx::SearchMethods::ClassMethods
 end
+
+# Require app specific hook mechanism
+require 'thinking_sphinx/brabus'  if defined?(Brabus)
