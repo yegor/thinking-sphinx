@@ -76,6 +76,10 @@ namespace :thinking_sphinx do
   desc "Generate the Sphinx configuration file using Thinking Sphinx's settings"
   task :configure => :app_env do
     config = ThinkingSphinx::Configuration.instance
+    unless ENV["SPHINX_PORT"].blank?
+      config.port = ENV["SPHINX_PORT"].to_i
+    end
+    
     puts "Generating Configuration to #{config.config_file}"
     config.build
   end
@@ -83,6 +87,9 @@ namespace :thinking_sphinx do
   desc "Index data for Sphinx using Thinking Sphinx's settings"
   task :index => :app_env do
     config = ThinkingSphinx::Configuration.instance
+    unless ENV["SPHINX_PORT"].blank?
+      config.port = ENV["SPHINX_PORT"].to_i
+    end
     unless ENV["INDEX_ONLY"] == "true"
       puts "Generating Configuration to #{config.config_file}"
       config.build
