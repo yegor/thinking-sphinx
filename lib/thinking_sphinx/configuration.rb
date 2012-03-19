@@ -359,6 +359,12 @@ module ThinkingSphinx
         directories += Rails.application.railties.engines.collect { |engine|
           engine.paths['app/models'].to_a
 	      }.flatten
+      end 
+      
+      if defined?(Brabus)
+        directories += Brabus.engines.collect { |engine|
+          engine.instance.autoload_paths
+	      }.flatten
       end
 
       directories
